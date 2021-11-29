@@ -2,12 +2,12 @@ const { ethers } = require("ethers");
 
 async function main() {
   // We get the contract to deploy
-  const Greeter = await ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
+  const WrappedEther = await ethers.getContractFactory("WrappedEther");
+  const wrappedEther = await WrappedEther.deploy();
 
-  await greeter.deployed();
+  await wrappedEther.deployed();
 
-  console.log("Greeter deployed to:", greeter.address);
+  console.log("WrappedEther deployed to:", wrappedEther.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
