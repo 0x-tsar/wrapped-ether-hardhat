@@ -28,6 +28,12 @@ async function main() {
   balance = await wrappedEther.balanceOf(account);
   console.log(`balance after: ${balance}`);
 
+  console.log("WITHDRAWING ETHER");
+  console.log("------------");
+
+  balance = await wrappedEther.balanceOf(account);
+  console.log(`final weth balance: ${balance}`);
+
   // Get the current balance
   // let balance = await wallet.getBalance();
   // console.log(balance.toString());
