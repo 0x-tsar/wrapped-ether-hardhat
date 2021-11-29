@@ -3,7 +3,7 @@ const hardhat = require("hardhat");
 
 async function main() {
   // We get the contract to deploy
-  const WrappedEther = hardhat.ethers.getContractFactory("WrappedEther");
+  const WrappedEther = await hardhat.ethers.getContractFactory("WrappedEther");
   const wrappedEther = await WrappedEther.deploy();
 
   await wrappedEther.deployed();
