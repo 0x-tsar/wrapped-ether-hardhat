@@ -24,13 +24,13 @@ async function main() {
   //         // Do something with roundData
   //         console.log("Latest Round Data", roundData)
   //     })
+  const wrappedEther = new ethers.Contract(
+    "0xa91ca5922c21dfec758f0467cc296b49a31ded35",
+    Wrapped.abi,
+    provider
+  );
+  console.log(wrappedEther);
 }
-
-const wrappedEther = new ethers.Contract(
-  "0xa91ca5922c21dfec758f0467cc296b49a31ded35",
-  Wrapped.abi,
-  provider
-);
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
