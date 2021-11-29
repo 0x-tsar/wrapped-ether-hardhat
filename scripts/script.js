@@ -19,18 +19,17 @@ async function main() {
   const account = wallet.address;
 
   const signed = wrappedEther.connect(wallet);
+  const value = ethers.utils.parseUnits("0.1");
 
-  let totalSupplyWether = await wrappedEther.totalSupplyWether();
+  let totalSupplyWether = await signed.totalSupplyWether();
   console.log(`totalSupplyWether: ${totalSupplyWether}`);
 
-  let balance = await wrappedEther.balanceOf(account);
+  let balance = await signed.balanceOf(account);
   console.log(`balance before: ${balance}`);
-
-  const value = ethers.utils.parseUnits("0.1");
 
   await signed.mint({ from: account, value: value });
 
-  balance = await wrappedEther.balanceOf(account);
+  balance = await signed.balanceOf(account);
   console.log(`balance after: ${balance}`);
 
   console.log("WITHDRAWING ETHER");
@@ -38,7 +37,7 @@ async function main() {
 
   await signed.withdraw(value);
 
-  balance = await wrappedEther.balanceOf(account);
+  balance = await signed.balanceOf(account);
   console.log(`final weth balance: ${balance}`);
 
   // Get the current balance
