@@ -1,8 +1,8 @@
 require("dotenv").config();
 const { ethers } = require("ethers");
 const hardhat = require("hardhat");
-
 const Wrapped = require("../artifacts/contracts/WrappedEther.sol/WrappedEther.json");
+const privateKey = process.env.mnemonic;
 
 async function main() {
   const provider = new ethers.providers.JsonRpcProvider(process.env.url);
@@ -13,8 +13,26 @@ async function main() {
     provider
   );
 
-  const totalSupplyWether = await wrappedEther.totalSupplyWether();
-  console.log(`totalSupplyWether: ${totalSupplyWether}`);
+  // let provider = ethers.getDefaultProvider();
+
+  let wallet = new ethers.Wallet(privateKey, provider);
+
+  // Get the current balance
+  // let balance = await wallet.getBalance();
+  // console.log(balance.toString());
+
+  // Make sure we are sweeping to an EOA, not a contract. The gas required
+  // to send to a contract cannot be certain, so we may leave dust behind
+  // or not set a high enough gas limit, in which case the transaction will
+  // fail.
+  // let code = await provider.getCode(newAddress);
+  // if (code !== '0x') { throw new Error('Cannot sweep to a contract'); }
+
+  // let totalSupplyWether = await wrappedEther.totalSupplyWether();
+  // console.log(`totalSupplyWether: ${totalSupplyWether}`);
+
+  // let totalSupplyWether = await wrappedEther.totalSupplyWether();
+  // console.log(`totalSupplyWether: ${totalSupplyWether}`);
 
   // const ticker = await wrappedEther.symbol();
   // const name = await wrappedEther.name();
