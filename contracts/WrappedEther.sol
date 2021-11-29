@@ -11,4 +11,14 @@ contract WrappedEther is ERC20 {
     function mint() public payable {
         _mint(msg.sender, msg.value);
     }
+
+    function withdraw(uint256 amount) public {
+        require(
+            balanceOf(msg.sender) >= amount,
+            "You dont`t own this amount of ethers"
+        );
+
+        _burn(msg.sender, amount);
+        payable(msg.sender).transfer(amount);
+    }
 }
