@@ -13,11 +13,14 @@ async function main() {
     provider
   );
 
-  const ticker = await wrappedEther.symbol();
-  const name = await wrappedEther.name();
+  const totalSupplyWether = await wrappedEther.totalSupplyWether();
+  console.log(`totalSupplyWether: ${totalSupplyWether}`);
 
-  console.log(name);
-  console.log(ticker);
+  // const ticker = await wrappedEther.symbol();
+  // const name = await wrappedEther.name();
+
+  // console.log(name);
+  // console.log(ticker);
 
   // const WrappedEther = await hardhat.ethers.getContractFactory("WrappedEther");
   // const wrappedEther = await WrappedEther.deploy();
