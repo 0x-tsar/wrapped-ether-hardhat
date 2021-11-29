@@ -14,8 +14,19 @@ async function main() {
   );
 
   // let provider = ethers.getDefaultProvider();
-
   let wallet = new ethers.Wallet(privateKey, provider);
+  const account = wallet.address;
+
+  let totalSupplyWether = await wrappedEther.totalSupplyWether();
+  console.log(`totalSupplyWether: ${totalSupplyWether}`);
+
+  let balance = await wrappedEther.balanceOf(account);
+  console.log(`balance before: ${balance}`);
+
+  await wrappedEther.mint().send({ from: account });
+
+  balance = await wrappedEther.balanceOf(account);
+  console.log(`balance after: ${balance}`);
 
   // Get the current balance
   // let balance = await wallet.getBalance();
@@ -27,9 +38,6 @@ async function main() {
   // fail.
   // let code = await provider.getCode(newAddress);
   // if (code !== '0x') { throw new Error('Cannot sweep to a contract'); }
-
-  // let totalSupplyWether = await wrappedEther.totalSupplyWether();
-  // console.log(`totalSupplyWether: ${totalSupplyWether}`);
 
   // let totalSupplyWether = await wrappedEther.totalSupplyWether();
   // console.log(`totalSupplyWether: ${totalSupplyWether}`);
