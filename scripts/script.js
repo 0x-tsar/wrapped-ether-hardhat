@@ -19,10 +19,6 @@ async function main() {
   const account = wallet.address;
 
   const signed = wrappedEther.connect(wallet);
-  // console.log(signed);
-  // Each DAI has 18 decimal places
-  // Send 1 DAI to "ricmoo.firefly.eth"
-  // tx = daiWithSigner.transfer("ricmoo.firefly.eth", dai);
 
   let totalSupplyWether = await wrappedEther.totalSupplyWether();
   console.log(`totalSupplyWether: ${totalSupplyWether}`);
@@ -30,9 +26,7 @@ async function main() {
   let balance = await wrappedEther.balanceOf(account);
   console.log(`balance before: ${balance}`);
 
-  // const value = parseInt(ethers.utils.formatEther("0.1"));
   const value = ethers.utils.parseUnits("0.1");
-  console.log(`value: ${value}`);
 
   await signed.mint({ from: account, value: value });
 
@@ -42,7 +36,9 @@ async function main() {
   console.log("WITHDRAWING ETHER");
   console.log("------------");
 
-  balance = await signed.withdraw(value);
+  await signed.withdraw(value);
+
+  balance = await wrappedEther.balanceOf(account);
   console.log(`final weth balance: ${balance}`);
 
   // Get the current balance
